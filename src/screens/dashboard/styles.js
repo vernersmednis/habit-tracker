@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
-export const AppWrapper = styled.div`
+export const DashboardWrapper = styled.div`
 	display: grid;
-	grid-template-columns: 450px 1fr;
+	grid-template-rows: auto 1fr;
 	height: 100vh;
 	width: 100vw;
+`;
+
+export const DashboardContent = styled.div`
+	display: grid;
+	grid-template-columns: 450px 1fr;
+	height: 100%;
 `;
 
 export const HabitList = styled.div`
