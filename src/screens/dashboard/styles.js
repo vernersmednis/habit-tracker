@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const DashboardContentStyled = styled.div`
 	display: grid;
 	grid-template-columns: 450px 1fr;
-	height: 100%;
+	height: 100vh;
 `;
 
 export const HabitListStyled = styled.div`
