@@ -29,24 +29,24 @@ function Dashboard() {
 
   
   return (
-    <Tabs.Root display="flex" flexDirection="column" height="100vh" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
+    <Tabs.Root display="flex" flexDirection="column" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
       {isMobile ? (
-        <Tabs.List display="flex" alignItems="center" height="auto" width="100%" whiteSpace="nowrap" borderBottom="1px solid #eee">
-          <Tabs.Trigger value="habit-list" width="100%">Habits</Tabs.Trigger>
-          <Tabs.Trigger value="habit-tracker" width="100%">Tracker</Tabs.Trigger>
+        <Tabs.List display="flex" alignItems="center" whiteSpace="nowrap" borderBottom="1px solid #eee">
+          <Tabs.Trigger value="habit-list" width="50%">Habits</Tabs.Trigger>
+          <Tabs.Trigger value="habit-tracker" width="50%">Tracker</Tabs.Trigger>
         </Tabs.List>
       ) : null}
-      <Tabs.Content value="habit-list" height="100%">
+      <Tabs.Content value="habit-list">
         <HabitListStyled>
           <HabitList habits={habits} setHabits={setHabits} />
         </HabitListStyled>
       </Tabs.Content>
-      <Tabs.Content value="habit-tracker" height="100%">
+      <Tabs.Content value="habit-tracker">
         <HabitTrackerStyled>
           <HabitTracker habits={habits} />
         </HabitTrackerStyled>
       </Tabs.Content>
-      <Tabs.Content value="desktop-view" height="100%">
+      <Tabs.Content value="desktop-view">
         <DashboardContentStyled>
           <HabitList habits={habits} setHabits={setHabits} />
           <HabitTracker habits={habits} />
