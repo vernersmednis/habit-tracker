@@ -1,17 +1,15 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useMediaQuery } from '@chakra-ui/react';
 import HabitList from '@/components/ui/custom/habit-list'
 import HabitTracker from '@/components/ui/custom/habit-tracker'
 import { Tabs } from "@chakra-ui/react";
 
 
 import {
-  DashboardContent,
-  DashboardWrapper,
-  HabitList as HabitListStyled,
-  HabitTracker as HabitTrackerStyled
+  DashboardContentStyled,
+  HabitListStyled,
+  HabitTrackerStyled
 } from './styles.js'
-import { useEffect } from 'react';
-
 
 function Dashboard() {
   const [habits, setHabits] = useState([
@@ -20,43 +18,39 @@ function Dashboard() {
     'Read',
   ]);
 
-  const [activeTab, setActiveTab] = useState('desktop-view');
 
-  // Responsive Design (Switch from Desktop to Mobile View and vice versa)
+  // Use Chakra UI's useMediaQuery for responsive design
+  const [isMobile] = useMediaQuery('(max-width: 900px)');
+  const [activeTab, setActiveTab] = useState(isMobile ? 'habit-list' : 'desktop-view');
+  
   useEffect(() => {
-    const handleResize = () => {
-      if (document.documentElement.scrollWidth > window.innerWidth) {
-        setActiveTab('tab-1');
-      }
-      else { 
-        setActiveTab('desktop-view');
-      }
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Call on mount
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    setActiveTab(isMobile ? 'habit-list' : 'desktop-view');
+  }, [isMobile]);
 
+  
   return (
-    <Tabs.Root height="100vh" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
-      {activeTab !== 'desktop-view' && (
-        <Tabs.List display="flex" alignItems="center" height="50px" width="100%" whiteSpace="nowrap" borderBottom="1px solid #eee">
-          <Tabs.Trigger value="tab-1" width="100%">Habits</Tabs.Trigger>
-          <Tabs.Trigger value="tab-2" width="100%">Tracker</Tabs.Trigger>
-          <Tabs.Trigger value="desktop-view" width="100%" display="none">Both</Tabs.Trigger>
+    <Tabs.Root display="flex" flexDirection="column" height="100vh" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
+      {isMobile ? (
+        <Tabs.List display="flex" alignItems="center" height="auto" width="100%" whiteSpace="nowrap" borderBottom="1px solid #eee">
+          <Tabs.Trigger value="habit-list" width="100%">Habits</Tabs.Trigger>
+          <Tabs.Trigger value="habit-tracker" width="100%">Tracker</Tabs.Trigger>
         </Tabs.List>
-      )}
-      <Tabs.Content value="tab-1" height="calc(100% - 66px)">
-        <HabitList habits={habits} setHabits={setHabits} />
+      ) : null}
+      <Tabs.Content value="habit-list" height="100%">
+        <HabitListStyled>
+          <HabitList habits={habits} setHabits={setHabits} />
+        </HabitListStyled>
       </Tabs.Content>
-      <Tabs.Content value="tab-2" height="calc(100% - 66px)">
-        <HabitTracker habits={habits} carousel={true} />
+      <Tabs.Content value="habit-tracker" height="100%">
+        <HabitTrackerStyled>
+          <HabitTracker habits={habits} />
+        </HabitTrackerStyled>
       </Tabs.Content>
       <Tabs.Content value="desktop-view" height="100%">
-        <DashboardContent>
+        <DashboardContentStyled>
           <HabitList habits={habits} setHabits={setHabits} />
-          <HabitTracker habits={habits} carousel={false} />
-        </DashboardContent>
+          <HabitTracker habits={habits} />
+        </DashboardContentStyled>
       </Tabs.Content>
     </Tabs.Root>
   );
