@@ -1,30 +1,20 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from '@/components/ui/provider'
-import HabitList from './components/ui/custom/habitlist'
-import HabitTracker from './components/ui/custom/habittracker'
-
-import {
-  AppWrapper,
-  HabitList as HabitListStyled,
-  HabitTracker as HabitTrackerStyled,
-} from './styles.js'
+import Dashboard from './screens/dashboard/index.jsx'
+import Login from './screens/login/index.jsx';
 
 function App() {
-  const [habits, setHabits] = useState([
-    'Drink Water',
-    'Exercise',
-    'Read',
-  ]);
 
   return (
-    <>
-      <Provider>
-        <AppWrapper>
-          <HabitList habits={habits} setHabits={setHabits} />
-          <HabitTracker habits={habits} />
-        </AppWrapper>
-      </Provider>
-    </>
+    <Provider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Navigate to='/login' />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
