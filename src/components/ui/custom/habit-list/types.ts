@@ -1,6 +1,4 @@
-
-import type { User } from '@/types/user.ts';
-import type { Habit } from '@/types/habit.ts';
+import type { Habit } from "@/types/habit";
 
 export interface HabitList {
   habits: Habit[];
