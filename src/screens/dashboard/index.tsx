@@ -10,19 +10,21 @@ import {
   HabitListStyled,
   HabitTrackerStyled
 } from './styles'
+import { useFetchHabits } from '@/hooks/useFetchHabits/useFetchHabits';
 
 function Dashboard() {
   const [habits, setHabits] = useState<Habit[]>([]);
-
 
   // Use Chakra UI's useMediaQuery for responsive design
   const [isMobile] = useMediaQuery(['(max-width: 900px)']);
   const [activeTab, setActiveTab] = useState(isMobile ? 'habit-list' : 'desktop-view');
 
+  const { data } = useFetchHabits();
+  console.log('[data]', data);
+
   useEffect(() => {
     setActiveTab(isMobile ? 'habit-list' : 'desktop-view');
   }, [isMobile]);
-
 
   return (
     <Tabs.Root display="flex" flexDirection="column" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
@@ -34,7 +36,7 @@ function Dashboard() {
       ) : null}
       <Tabs.Content value="habit-list">
         <HabitListStyled>
-          <HabitList habits={habits} setHabits={setHabits} />
+          <HabitList habits={data} />
         </HabitListStyled>
       </Tabs.Content>
       <Tabs.Content value="habit-tracker">
@@ -44,8 +46,8 @@ function Dashboard() {
       </Tabs.Content>
       <Tabs.Content value="desktop-view">
         <DashboardContentStyled>
-          <HabitList habits={habits} setHabits={setHabits} />
-          <HabitTracker habits={habits} />
+          <HabitList habits={data} />
+          <HabitTracker habits={data} />
         </DashboardContentStyled>
       </Tabs.Content>
     </Tabs.Root>
