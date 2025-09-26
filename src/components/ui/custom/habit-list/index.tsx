@@ -1,7 +1,8 @@
 import { Box, Heading, VStack, Input, Button } from '@chakra-ui/react';
 import { useState } from 'react';
+import { HabitList as HabitListProps } from './types';
 
-const HabitList = (props) => {
+const HabitList = (props: HabitListProps) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleAddHabit = () => {

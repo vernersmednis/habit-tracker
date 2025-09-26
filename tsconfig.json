@@ -1,44 +1,14 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
-
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
-
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
-
-    // Stricter Typechecking Options
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
-    "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-  }
+    "target": "ESNext",               // modern JS output
+    "module": "ESNext",               // keep ES modules
+    "jsx": "react-jsx",               // enables JSX with React 17+
+    "moduleResolution": "Node",       // how modules are resolved
+    "strict": true,                   // enable all strict checks
+    "esModuleInterop": true,          // smooth import/export
+    "forceConsistentCasingInFileNames": true, // avoid casing issues
+    "skipLibCheck": true              // faster builds, skip type checks in node_modules
+  },
+  "include": ["src"],                 // only look inside src/
+  "exclude": ["node_modules"]         // ignore dependencies
 }
