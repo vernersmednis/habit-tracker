@@ -1,11 +1,12 @@
 import { Box, Table, Heading, Flex, Button, Text } from '@chakra-ui/react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useMeasure } from 'react-use';
+import type { HabitTrackerProps } from './types';
 
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 
-const HabitTracker = (props) => {
+const HabitTracker = ({ habits }: HabitTrackerProps) => {
   // State and handlers for carousel navigation:
   const [currentDayIdx, setCurrentDayIdx] = useState(1); // Default to Tuesday
 
@@ -44,9 +45,9 @@ const HabitTracker = (props) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {props.habits && props.habits.map((habit, idx) => (
+              {habits && habits.map((habit, idx) => (
                 <Table.Row key={idx}>
-                  <Table.Cell fontWeight="bold">{habit}</Table.Cell>
+                  <Table.Cell fontWeight="bold">{habit.habit}</Table.Cell>
                   <Table.Cell></Table.Cell>
                 </Table.Row>
               ))}
@@ -66,9 +67,9 @@ const HabitTracker = (props) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {props.habits && props.habits.map((habit, idx) => (
+              {habits && habits.map((habit, idx) => (
                 <Table.Row key={idx}>
-                  <Table.Cell fontWeight="bold">{habit}</Table.Cell>
+                  <Table.Cell fontWeight="bold">{habit.habit}</Table.Cell>
                   {days.map(day => (
                     <Table.Cell key={day}></Table.Cell>
                   ))}

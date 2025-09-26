@@ -1,33 +1,29 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@chakra-ui/react';
 import HabitList from '@/components/ui/custom/habit-list'
 import HabitTracker from '@/components/ui/custom/habit-tracker'
 import { Tabs } from "@chakra-ui/react";
-
+import type { Habit } from '@/types/habit';
 
 import {
   DashboardContentStyled,
   HabitListStyled,
   HabitTrackerStyled
-} from './styles.js'
+} from './styles'
 
 function Dashboard() {
-  const [habits, setHabits] = useState([
-    'Drink Water',
-    'Exercise',
-    'Read',
-  ]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
 
   // Use Chakra UI's useMediaQuery for responsive design
-  const [isMobile] = useMediaQuery('(max-width: 900px)');
+  const [isMobile] = useMediaQuery(['(max-width: 900px)']);
   const [activeTab, setActiveTab] = useState(isMobile ? 'habit-list' : 'desktop-view');
-  
+
   useEffect(() => {
     setActiveTab(isMobile ? 'habit-list' : 'desktop-view');
   }, [isMobile]);
 
-  
+
   return (
     <Tabs.Root display="flex" flexDirection="column" variant="enclosed" colorScheme="blue" value={activeTab} onValueChange={(e) => setActiveTab(e.value)}>
       {isMobile ? (

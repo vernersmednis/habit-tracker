@@ -1,6 +1,7 @@
 import type { Habit } from "@/types/habit";
+import type { Dispatch, SetStateAction } from "react";
 
-export interface HabitList {
+export interface HabitListProps {
   habits: Habit[];
-  setHabits: (habits: Habit[]) => void;
+  setHabits: Dispatch<SetStateAction<Habit[]>>;
 }
