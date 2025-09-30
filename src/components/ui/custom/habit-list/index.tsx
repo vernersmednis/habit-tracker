@@ -14,7 +14,7 @@ const HabitList = ({ habits, refetchHabits, createHabit, deleteHabit }: HabitLis
     refetchHabits(); 
   };
   
-  const handleDeleteHabit = async (id: number) => {
+  const handleDeleteHabit = async (id: string) => {
     await deleteHabit(id);
     refetchHabits(); 
   };

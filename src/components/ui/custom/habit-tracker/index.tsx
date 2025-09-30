@@ -8,7 +8,7 @@ const HabitTracker = ({ habits, weekdays, updateHabitWeekday, habitWeekdays, ref
 
 
   // Function to handle toggling the isDone state of a habit for a specific weekday
-  const handleToggleIsDone = async (habitId: number, weekdayId: number, isDone: boolean) => {
+  const handleToggleIsDone = async (habitId: string, weekdayId: string, isDone: boolean) => {
     await updateHabitWeekday(habitId, weekdayId, isDone); 
     refetchHabitWeekdays();
   };

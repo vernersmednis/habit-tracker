@@ -1,7 +1,7 @@
 import { api } from "@/api/api";
 import type { Habit } from "@/types/habit";
 
-export const createHabit = (habit: String) => {
+export const createHabit = (habit: string) => {
   const response = api.post<Habit[]>("/habits", { "habit": habit });
   return response;
 };
@@ -11,7 +11,7 @@ export const getAllHabits = () => {
   return response;
 };
 
-export const deleteHabit = (id: number) => {
+export const deleteHabit = (id: string) => {
   const response = api.delete<Habit[]>(`/habits/${id}`);
   return response;
 };

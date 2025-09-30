@@ -1,4 +1,4 @@
 export interface Weekday {
-    id: number;
+    id: string;
     weekday: string;
 }
