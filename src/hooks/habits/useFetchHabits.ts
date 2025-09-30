@@ -3,19 +3,24 @@ import type { Habit } from "@/types/habit";
 import { useEffect, useState } from "react";
 
 export const useFetchHabits = () => {
-  const [data, setData] = useState<Habit[]>([]);
+  const [habits, setHabits] = useState<Habit[]>([]);
 
   const getAll = async () => {
     const data = await getAllHabits();
-
     return data;
   };
 
+  const refetchHabits = async () => {
+    const res = await getAll();
+    setHabits(res.data);
+  };
+
   useEffect(() => {
-    getAll().then((res) => setData(res.data));
+    getAll().then((res) => setHabits(res.data));
   }, []);
 
   return {
-    data,
+    habits,
+    refetchHabits,
   };
 };

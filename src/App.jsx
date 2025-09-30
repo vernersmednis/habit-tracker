@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Provider } from '@/components/ui/provider'
-import Dashboard from './screens/dashboard/index.jsx'
-import Login from './screens/login/index.jsx';
+import Dashboard from './screens/dashboard/index.tsx'
+import Login from './screens/login/index.tsx';
 
 function App() {
 

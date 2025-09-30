@@ -1,7 +1,7 @@
 import type { User } from "./user.ts";
 
 export interface Habit {
-  id?: number;
+  id: number;
   user: User;
   habit: string;
 }

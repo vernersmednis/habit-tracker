@@ -3,25 +3,32 @@ import { useMediaQuery } from '@chakra-ui/react';
 import HabitList from '@/components/ui/custom/habit-list'
 import HabitTracker from '@/components/ui/custom/habit-tracker'
 import { Tabs } from "@chakra-ui/react";
-import type { Habit } from '@/types/habit';
+import { useFetchHabitWeekdays } from '@/hooks/habitWeekdays/useFetchHabitWeekdays';
+import { useUpdateHabitWeekday } from '@/hooks/habitWeekdays/useUpdateHabitWeekday';
+import { useFetchWeekdays } from '@/hooks/weekdays/fetchWeekdays';
+import { useFetchHabits } from '@/hooks/habits/useFetchHabits';
+import { useCreateHabit } from '@/hooks/habits/useCreateHabit';
+import { useDeleteHabit } from '@/hooks/habits/useDeleteHabit';
 
 import {
   DashboardContentStyled,
   HabitListStyled,
   HabitTrackerStyled
 } from './styles'
-import { useFetchHabits } from '@/hooks/useFetchHabits/useFetchHabits';
 
 function Dashboard() {
-  const [habits, setHabits] = useState<Habit[]>([]);
+
+  // Fetch data from the database
+  const { weekdays } = useFetchWeekdays();
+  const { updateHabitWeekday } = useUpdateHabitWeekday();
+  const { habitWeekdays, refetchHabitWeekdays } = useFetchHabitWeekdays();
+  const { habits, refetchHabits } = useFetchHabits();
+  const { createHabit } = useCreateHabit();
+  const { deleteHabit } = useDeleteHabit();
 
   // Use Chakra UI's useMediaQuery for responsive design
   const [isMobile] = useMediaQuery(['(max-width: 900px)']);
   const [activeTab, setActiveTab] = useState(isMobile ? 'habit-list' : 'desktop-view');
-
-  const { data } = useFetchHabits();
-  console.log('[data]', data);
-
   useEffect(() => {
     setActiveTab(isMobile ? 'habit-list' : 'desktop-view');
   }, [isMobile]);
@@ -36,18 +43,18 @@ function Dashboard() {
       ) : null}
       <Tabs.Content value="habit-list">
         <HabitListStyled>
-          <HabitList habits={data} />
+          <HabitList habits={habits} refetchHabits={refetchHabits} createHabit={createHabit} deleteHabit={deleteHabit} />
         </HabitListStyled>
       </Tabs.Content>
       <Tabs.Content value="habit-tracker">
         <HabitTrackerStyled>
-          <HabitTracker habits={habits} />
+          <HabitTracker habits={habits} weekdays={weekdays} updateHabitWeekday={updateHabitWeekday} habitWeekdays={habitWeekdays} refetchHabitWeekdays={refetchHabitWeekdays}/>
         </HabitTrackerStyled>
       </Tabs.Content>
       <Tabs.Content value="desktop-view">
         <DashboardContentStyled>
-          <HabitList habits={data} />
-          <HabitTracker habits={data} />
+          <HabitList habits={habits} refetchHabits={refetchHabits} createHabit={createHabit} deleteHabit={deleteHabit} />
+          <HabitTracker habits={habits} weekdays={weekdays} updateHabitWeekday={updateHabitWeekday} habitWeekdays={habitWeekdays} refetchHabitWeekdays={refetchHabitWeekdays}/>
         </DashboardContentStyled>
       </Tabs.Content>
     </Tabs.Root>
