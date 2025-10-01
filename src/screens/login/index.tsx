@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  interface HandleSubmitEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleSubmit = (e: HandleSubmitEvent): void => {
     e.preventDefault();
     navigate("/dashboard");
   };
