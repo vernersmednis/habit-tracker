@@ -1,8 +1,14 @@
 import { Box, Heading, VStack, Input, Button } from '@chakra-ui/react';
-import { useState } from 'react';
-import type { HabitListProps as HabitListProps } from './types';
+import { useState, useContext } from 'react';
+import { DashboardContext, type DashboardContextType } from '@/contexts/DashboardContext'; // Update the path as needed
 
-const HabitList = ({ habits, refetchHabits, createHabit, deleteHabit }: HabitListProps & { refetchHabits?: () => void }) => {
+const HabitList = () => {
+
+  
+  // Data from context
+  const {
+    habits, createHabit, deleteHabit, refetchHabits
+  } = useContext(DashboardContext) as DashboardContextType;
 
 
   // Functionality for refetching habits after adding and deleting
