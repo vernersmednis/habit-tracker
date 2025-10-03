@@ -11,7 +11,7 @@ export const getAllHabits = () => {
   return response;
 };
 
-export const deleteHabit = (id: number) => {
+export const deleteHabit = (id: string) => {
   const response = api.delete<Habit[]>(`/habits/${id}`);
   return response;
 };
