@@ -6,7 +6,7 @@ import type { AxiosResponse } from "axios";
 export interface HabitTrackerProps {
   habits: Habit[];
   weekdays: Weekday[];
-  updateHabitWeekday: (habitId: number, weekdayId: number, isDone: boolean) => Promise<AxiosResponse<HabitWeekday[]>>
+  updateHabitWeekday: (habitId: string, weekdayId: string, isDone: boolean) => Promise<AxiosResponse<HabitWeekday[]>>
   habitWeekdays: { habit: Habit; weekday: Weekday; isDone: boolean }[];
   refetchHabitWeekdays: () => Promise<void>;
 }

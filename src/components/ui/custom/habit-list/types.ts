@@ -5,5 +5,5 @@ export interface HabitListProps {
   habits: Habit[];
   refetchHabits: () => Promise<void>;
   createHabit: (name: string) => Promise<AxiosResponse<Habit[]>>
-  deleteHabit: (id: number) => Promise<AxiosResponse<Habit[]>>
+  deleteHabit: (id: string) => Promise<AxiosResponse<Habit[]>>
 }
