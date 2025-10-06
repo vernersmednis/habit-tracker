@@ -1,30 +1,29 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-
-export const DashboardContentStyled = styled.div`
-	display: grid;
-	grid-template-columns: 450px 1fr;
-	height: 100vh;
+export const DashboardContentContainer = styled.div`
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  height: 100vh;
 `;
 
-export const HabitListStyled = styled.div`
-	display: flex;
-	justify-content: center;
+export const HabitListContainer = styled.div`
+  display: flex;
+  justify-content: center;
 
-	& > :first-child {
-		width: 450px;
-		height: 100vh;
-		overflow-y: auto;
-	}
+  & > :first-child {
+    width: 450px;
+    height: 100vh;
+    overflow-y: auto;
+  }
 `;
 
-export const HabitTrackerStyled = styled.div`
-	display: flex;
-	justify-content: center;
+export const HabitTrackerContainer = styled.div`
+  display: flex;
+  justify-content: center;
 
-	& > :first-child {
-		width: 450px;
-		height: 100vh;
-		overflow-y: auto;
-	}
+  & > :first-child {
+    width: 450px;
+    height: 100vh;
+    overflow-y: auto;
+  }
 `;
