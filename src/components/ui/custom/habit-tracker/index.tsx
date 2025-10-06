@@ -1,11 +1,16 @@
+import { DashboardContext, type DashboardContextType } from '@/contexts/DashboardContext';
 import { Box, Table, Heading, Checkbox, Flex, Button, Text } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useMeasure } from 'react-use';
-import type { HabitTrackerProps } from './types';
 
 
-const HabitTracker = ({ habits, weekdays, updateHabitWeekday, habitWeekdays, refetchHabitWeekdays }: HabitTrackerProps) => {
+const HabitTracker = () => {
 
+
+  // Data from context
+  const {
+    habits, updateHabitWeekday, refetchHabitWeekdays, weekdays, habitWeekdays
+  }: DashboardContextType = useContext(DashboardContext);
 
   // Function to handle toggling the isDone state of a habit for a specific weekday
   const handleToggleIsDone = async (habitId: string, weekdayId: string, isDone: boolean) => {
