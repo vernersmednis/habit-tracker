@@ -10,8 +10,7 @@ const HabitTracker = () => {
   // Data from context
   const {
     habits, updateHabitWeekday, refetchHabitWeekdays, weekdays, habitWeekdays
-  } = useContext(DashboardContext) as DashboardContextType;
-  
+  }: DashboardContextType = useContext(DashboardContext);
 
   // Function to handle toggling the isDone state of a habit for a specific weekday
   const handleToggleIsDone = async (habitId: string, weekdayId: string, isDone: boolean) => {

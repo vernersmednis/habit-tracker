@@ -1,5 +1,5 @@
 
-import { type ReactNode, createContext } from 'react';
+import { type ReactNode, createContext, useMemo } from 'react';
 import { useFetchWeekdays } from '@/hooks/weekdays/fetchWeekdays';
 import { useUpdateHabitWeekday } from '@/hooks/habitWeekdays/useUpdateHabitWeekday';
 import { useFetchHabitWeekdays } from '@/hooks/habitWeekdays/useFetchHabitWeekdays';
@@ -22,7 +22,7 @@ export type DashboardContextType = {
   deleteHabit: (habitId: string) => Promise<AxiosResponse<Habit[]>>;
 };
 
-export const DashboardContext = createContext<DashboardContextType | undefined>(undefined);
+export const DashboardContext = createContext<DashboardContextType>({} as DashboardContextType);
 
 interface DashboardProviderProps {
   children: ReactNode;
@@ -36,18 +36,15 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
   const { createHabit } = useCreateHabit();
   const { deleteHabit } = useDeleteHabit();
 
+  const value = useMemo(() => ({
+    weekdays, updateHabitWeekday, habitWeekdays, refetchHabitWeekdays,
+    habits, refetchHabits, createHabit, deleteHabit
+  }), [weekdays, updateHabitWeekday, habitWeekdays, refetchHabitWeekdays,
+      habits, refetchHabits, createHabit, deleteHabit]);
+
   return (
     <DashboardContext.Provider
-      value={{
-        weekdays,
-        updateHabitWeekday,
-        habitWeekdays,
-        refetchHabitWeekdays,
-        habits,
-        refetchHabits,
-        createHabit,
-        deleteHabit,
-      }}
+      value={value}
     >
       {children}
     </DashboardContext.Provider>
